@@ -1,0 +1,32 @@
+# https://stepik.org/lesson/3369/step/11?unit=952
+# interesting solutions can be found here in comments(https://habr.com/ru/post/210796/)
+n = int(input())
+shift = 1
+value = 1
+matrix = [[0 for i in range(n)] for j in range(n)]
+
+for i in range(n):
+    matrix[0][i] = value
+    value += 1
+for k in range(1, n//2 + 1):
+    # down
+    for j in range(n - shift):
+        matrix[k + j][n - k] = value
+        value += 1
+    # to the left
+    for i in range(n - shift):
+        matrix[n - k][n - k - 1 - i] = value
+        value += 1
+    shift += 1
+    # up
+    for j in range(n - shift):
+        matrix[n - k - j - 1][k - 1] = value
+        value += 1
+    # to the right
+    for i in range(n - shift):
+        matrix[k][k + i] = value
+        value += 1
+    shift += 1
+
+for string in matrix:
+    print(*string)
